@@ -1,0 +1,198 @@
+<!doctype html><html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Spec to Delivery · Run Report</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f9;color:#17263d;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:48px 24px}header{background:#15283f;color:white;padding:36px;border-radius:20px}h1{font-size:36px;line-height:1.2;margin:12px 0}h2{margin-top:36px}h3{margin:0 0 12px}small{color:#b7d5f0}.status{display:inline-block;padding:6px 14px;border-radius:30px;background:#e2f7f0;color:#164d3b;font-weight:650}section,article{background:white;border:1px solid #dce4ef;border-radius:14px;padding:22px;margin:14px 0}article{display:flex;gap:20px}article span{color:#4775ba;font-size:22px;font-weight:700}article div{min-width:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace}nav{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}nav a{color:#285e94}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:28px}main{padding:20px 12px}header{padding:24px}}
+</style><main><header><small>SPECIFICATION → FEEDBACK → REVIEW → DELIVERY</small><h1>Spec to Delivery Loop</h1>
+<p>A fictional workshop-booking policy, with real Python checks and a visible repair cycle.</p>
+<div class="status">delivered</div><p>isolated · Scripted adapter · No API key</p></header>
+<nav><a href="#attempts">Compare attempts</a><a href="#trace">Inspect execution trace</a></nav>
+<h2 id="attempts">Artifacts and quality gates</h2><div class="grid"><section><h3>Attempt 1</h3><ul><li>compile: PASS</li><li>restricted_syntax: PASS</li><li>acceptance: FAIL</li></ul><pre>def can_book(capacity, booked, requested):
+    return requested &gt;= 0 and booked + requested &lt;= capacity
+</pre></section><section><h3>Attempt 2</h3><ul><li>compile: PASS</li><li>restricted_syntax: PASS</li><li>acceptance: PASS</li></ul><pre>def can_book(capacity, booked, requested):
+    return (capacity &gt;= 0 and booked &gt;= 0 and requested &gt; 0
+            and booked + requested &lt;= capacity)
+</pre></section></div>
+<h2 id="trace">Execution trace</h2><article><span>01</span><div><h3>observe</h3><pre>{
+  &quot;spec_id&quot;: &quot;fictional-workshop-booking&quot;,
+  &quot;criteria&quot;: [
+    &quot;available_seats&quot;,
+    &quot;exact_capacity&quot;,
+    &quot;overflow&quot;,
+    &quot;positive_request&quot;,
+    &quot;negative_request&quot;,
+    &quot;nonnegative_booked&quot;,
+    &quot;nonnegative_capacity&quot;,
+    &quot;empty_workshop&quot;,
+    &quot;already_overbooked&quot;,
+    &quot;one_last_seat&quot;
+  ]
+}</pre></div></article><article><span>02</span><div><h3>plan</h3><pre>{
+  &quot;tasks&quot;: [
+    &quot;implement booking policy&quot;,
+    &quot;verify all acceptance criteria&quot;,
+    &quot;request final review&quot;
+  ]
+}</pre></div></article><article><span>03</span><div><h3>generate</h3><pre>{
+  &quot;iteration&quot;: 1,
+  &quot;artifact&quot;: &quot;attempt_01.py&quot;,
+  &quot;sha256&quot;: &quot;8084787649a9168444dc67f99d89c27fdbfa1ce23d95597e9c61a061fd6f21ab&quot;
+}</pre></div></article><article><span>04</span><div><h3>verify</h3><pre>{
+  &quot;iteration&quot;: 1,
+  &quot;gates&quot;: [
+    {
+      &quot;gate&quot;: &quot;compile&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;gate&quot;: &quot;restricted_syntax&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;gate&quot;: &quot;acceptance&quot;,
+      &quot;passed&quot;: false,
+      &quot;cases&quot;: [
+        {
+          &quot;id&quot;: &quot;available_seats&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;exact_capacity&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;overflow&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;positive_request&quot;,
+          &quot;passed&quot;: false,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;negative_request&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;nonnegative_booked&quot;,
+          &quot;passed&quot;: false,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;nonnegative_capacity&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;empty_workshop&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;already_overbooked&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;one_last_seat&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        }
+      ]
+    }
+  ]
+}</pre></div></article><article><span>05</span><div><h3>reflect</h3><pre>{
+  &quot;iteration&quot;: 1,
+  &quot;failed_criteria&quot;: [
+    &quot;positive_request&quot;,
+    &quot;nonnegative_booked&quot;
+  ],
+  &quot;diagnosis&quot;: &quot;The draft checked available seats but omitted input-boundary rules.&quot;,
+  &quot;next_action&quot;: &quot;Require a positive request and nonnegative capacity and booked count; rerun all checks.&quot;,
+  &quot;source&quot;: &quot;scripted demo adapter&quot;
+}</pre></div></article><article><span>06</span><div><h3>generate</h3><pre>{
+  &quot;iteration&quot;: 2,
+  &quot;artifact&quot;: &quot;attempt_02.py&quot;,
+  &quot;sha256&quot;: &quot;9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f&quot;
+}</pre></div></article><article><span>07</span><div><h3>verify</h3><pre>{
+  &quot;iteration&quot;: 2,
+  &quot;gates&quot;: [
+    {
+      &quot;gate&quot;: &quot;compile&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;gate&quot;: &quot;restricted_syntax&quot;,
+      &quot;passed&quot;: true
+    },
+    {
+      &quot;gate&quot;: &quot;acceptance&quot;,
+      &quot;passed&quot;: true,
+      &quot;cases&quot;: [
+        {
+          &quot;id&quot;: &quot;available_seats&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;exact_capacity&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        },
+        {
+          &quot;id&quot;: &quot;overflow&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;positive_request&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;negative_request&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;nonnegative_booked&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;nonnegative_capacity&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;empty_workshop&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;already_overbooked&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: false
+        },
+        {
+          &quot;id&quot;: &quot;one_last_seat&quot;,
+          &quot;passed&quot;: true,
+          &quot;actual&quot;: true
+        }
+      ]
+    }
+  ]
+}</pre></div></article><article><span>08</span><div><h3>review_requested</h3><pre>{
+  &quot;artifact&quot;: &quot;attempt_02.py&quot;,
+  &quot;sha256&quot;: &quot;9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f&quot;
+}</pre></div></article><article><span>09</span><div><h3>human_review</h3><pre>{
+  &quot;decision&quot;: &quot;approve&quot;,
+  &quot;sha256&quot;: &quot;9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f&quot;
+}</pre></div></article><article><span>10</span><div><h3>deliver</h3><pre>{
+  &quot;artifact&quot;: &quot;delivery/booking_policy.py&quot;,
+  &quot;sha256&quot;: &quot;9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f&quot;
+}</pre></div></article>
+<footer><p>The adapter is deterministic; the checks execute locally. Passing checks still requires a separate review decision. This report is a portfolio demonstration, not evidence of an enterprise deployment.</p></footer></main></html>

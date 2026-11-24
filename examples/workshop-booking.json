@@ -1,0 +1,17 @@
+{
+  "id": "fictional-workshop-booking",
+  "purpose": "Decide whether a group can book seats in a fictional community workshop.",
+  "contract": "Integer inputs. Capacity and booked must be nonnegative, requested must be positive, and the booking must fit within capacity.",
+  "acceptance": [
+    {"id": "available_seats", "args": [12, 3, 2], "expected": true},
+    {"id": "exact_capacity", "args": [12, 10, 2], "expected": true},
+    {"id": "overflow", "args": [12, 10, 3], "expected": false},
+    {"id": "positive_request", "args": [12, 3, 0], "expected": false},
+    {"id": "negative_request", "args": [12, 3, -2], "expected": false},
+    {"id": "nonnegative_booked", "args": [12, -3, 2], "expected": false},
+    {"id": "nonnegative_capacity", "args": [-1, 0, 1], "expected": false},
+    {"id": "empty_workshop", "args": [0, 0, 1], "expected": false},
+    {"id": "already_overbooked", "args": [12, 14, 1], "expected": false},
+    {"id": "one_last_seat", "args": [12, 11, 1], "expected": true}
+  ]
+}

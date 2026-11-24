@@ -1,0 +1,367 @@
+{
+  "spec_id": "fictional-workshop-booking",
+  "spec_sha256": "af3c173e30d07403f4523688f5989e97a1fd0b7f438479872d784dfe52c6e6b1",
+  "mode": "isolated",
+  "status": "delivered",
+  "max_iterations": 3,
+  "attempts": [
+    {
+      "number": 1,
+      "artifact": "attempt_01.py",
+      "source": "def can_book(capacity, booked, requested):\n    return requested >= 0 and booked + requested <= capacity\n",
+      "sha256": "8084787649a9168444dc67f99d89c27fdbfa1ce23d95597e9c61a061fd6f21ab",
+      "gates": [
+        {
+          "gate": "compile",
+          "passed": true
+        },
+        {
+          "gate": "restricted_syntax",
+          "passed": true
+        },
+        {
+          "gate": "acceptance",
+          "passed": false,
+          "cases": [
+            {
+              "id": "available_seats",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "exact_capacity",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "overflow",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "positive_request",
+              "passed": false,
+              "actual": true
+            },
+            {
+              "id": "negative_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_booked",
+              "passed": false,
+              "actual": true
+            },
+            {
+              "id": "nonnegative_capacity",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "empty_workshop",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "already_overbooked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "one_last_seat",
+              "passed": true,
+              "actual": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "artifact": "attempt_02.py",
+      "source": "def can_book(capacity, booked, requested):\n    return (capacity >= 0 and booked >= 0 and requested > 0\n            and booked + requested <= capacity)\n",
+      "sha256": "9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f",
+      "gates": [
+        {
+          "gate": "compile",
+          "passed": true
+        },
+        {
+          "gate": "restricted_syntax",
+          "passed": true
+        },
+        {
+          "gate": "acceptance",
+          "passed": true,
+          "cases": [
+            {
+              "id": "available_seats",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "exact_capacity",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "overflow",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "positive_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "negative_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_booked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_capacity",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "empty_workshop",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "already_overbooked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "one_last_seat",
+              "passed": true,
+              "actual": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "step": 1,
+      "stage": "observe",
+      "spec_id": "fictional-workshop-booking",
+      "criteria": [
+        "available_seats",
+        "exact_capacity",
+        "overflow",
+        "positive_request",
+        "negative_request",
+        "nonnegative_booked",
+        "nonnegative_capacity",
+        "empty_workshop",
+        "already_overbooked",
+        "one_last_seat"
+      ]
+    },
+    {
+      "step": 2,
+      "stage": "plan",
+      "tasks": [
+        "implement booking policy",
+        "verify all acceptance criteria",
+        "request final review"
+      ]
+    },
+    {
+      "step": 3,
+      "stage": "generate",
+      "iteration": 1,
+      "artifact": "attempt_01.py",
+      "sha256": "8084787649a9168444dc67f99d89c27fdbfa1ce23d95597e9c61a061fd6f21ab"
+    },
+    {
+      "step": 4,
+      "stage": "verify",
+      "iteration": 1,
+      "gates": [
+        {
+          "gate": "compile",
+          "passed": true
+        },
+        {
+          "gate": "restricted_syntax",
+          "passed": true
+        },
+        {
+          "gate": "acceptance",
+          "passed": false,
+          "cases": [
+            {
+              "id": "available_seats",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "exact_capacity",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "overflow",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "positive_request",
+              "passed": false,
+              "actual": true
+            },
+            {
+              "id": "negative_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_booked",
+              "passed": false,
+              "actual": true
+            },
+            {
+              "id": "nonnegative_capacity",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "empty_workshop",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "already_overbooked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "one_last_seat",
+              "passed": true,
+              "actual": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "stage": "reflect",
+      "iteration": 1,
+      "failed_criteria": [
+        "positive_request",
+        "nonnegative_booked"
+      ],
+      "diagnosis": "The draft checked available seats but omitted input-boundary rules.",
+      "next_action": "Require a positive request and nonnegative capacity and booked count; rerun all checks.",
+      "source": "scripted demo adapter"
+    },
+    {
+      "step": 6,
+      "stage": "generate",
+      "iteration": 2,
+      "artifact": "attempt_02.py",
+      "sha256": "9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f"
+    },
+    {
+      "step": 7,
+      "stage": "verify",
+      "iteration": 2,
+      "gates": [
+        {
+          "gate": "compile",
+          "passed": true
+        },
+        {
+          "gate": "restricted_syntax",
+          "passed": true
+        },
+        {
+          "gate": "acceptance",
+          "passed": true,
+          "cases": [
+            {
+              "id": "available_seats",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "exact_capacity",
+              "passed": true,
+              "actual": true
+            },
+            {
+              "id": "overflow",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "positive_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "negative_request",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_booked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "nonnegative_capacity",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "empty_workshop",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "already_overbooked",
+              "passed": true,
+              "actual": false
+            },
+            {
+              "id": "one_last_seat",
+              "passed": true,
+              "actual": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "stage": "review_requested",
+      "artifact": "attempt_02.py",
+      "sha256": "9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f"
+    },
+    {
+      "step": 9,
+      "stage": "human_review",
+      "decision": "approve",
+      "sha256": "9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f"
+    },
+    {
+      "step": 10,
+      "stage": "deliver",
+      "artifact": "delivery/booking_policy.py",
+      "sha256": "9624576989392dd6e40aab38951470f1dbb7a35a8ecde74de5fd5de276ba8a2f"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+FICTIONAL compatibility notes
+The existing workshop page expects a boolean from can_book(capacity, booked, requested).
+Keep this function name and argument order. No database, network or write-back behavior is needed.
+This text demonstrates the human-context checkpoint, not an automated understanding of legacy code.
